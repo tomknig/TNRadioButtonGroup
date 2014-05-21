@@ -35,14 +35,13 @@
 
 #pragma mark - Creation
 - (void)setup{
-    
     [self createRadioButton];
-    
     [super setup];
 }
 
 - (void)createRadioButton {
-    self.radioButton = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.data.borderWidth, self.data.borderHeight)];
+    CGFloat buttonHeight = self.data.borderHeight;
+    self.radioButton = [[UIView alloc] initWithFrame:CGRectMake(0, [self verticalButtonOriginForHeight:buttonHeight], self.data.borderWidth, buttonHeight)];
     
     UIBezierPath *borderPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, self.data.borderWidth, self.data.borderHeight)];
     

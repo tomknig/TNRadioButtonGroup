@@ -34,14 +34,13 @@
 
 #pragma mark - Creation
 - (void)setup{
-    
     [self createRadioButton];
-    
     [super setup];
 }
 
-- (void)createRadioButton {    
-    self.radioButton = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.data.unselectedImage.size.width, self.data.unselectedImage.size.height)];
+- (void)createRadioButton {
+    CGFloat buttonHeight = self.data.unselectedImage.size.height;
+    self.radioButton = [[UIView alloc] initWithFrame:CGRectMake(0, [self verticalButtonOriginForHeight:buttonHeight], self.data.unselectedImage.size.width, buttonHeight)];
     
     self.imageView = [[UIImageView alloc] initWithImage:self.data.unselectedImage];
     [self.radioButton addSubview:self.imageView];

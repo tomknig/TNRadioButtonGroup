@@ -9,7 +9,8 @@
 #import "TNRadioButton.h"
 
 @interface TNRadioButton()
-
+@property (nonatomic) CGRect labelRect;
+@property (nonatomic) CGFloat lineHeight;
 @end
 
 @implementation TNRadioButton
@@ -19,6 +20,8 @@
     self = [super init];
     
     if (self) {
+        self.labelRect = CGRectZero;
+        self.lineHeight = 0;
         self.data = data;
     }
     
@@ -37,15 +40,15 @@
 - (void)createRadioButton {}
 
 - (void)createLabel {
+    self.backgroundColor = [UIColor greenColor];
     
-    CGRect labelRect = [self.data.labelText boundingRectWithSize:CGSizeMake(150, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil];
-    
-    self.lblLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.radioButton.frame.origin.x + self.radioButton.frame.size.width + 15, (self.radioButton.frame.size.height - labelRect.size.height) / 2, labelRect.size.width, labelRect.size.height)];
+    self.lblLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.radioButton.frame.origin.x + self.radioButton.frame.size.width + 15, 0, self.labelRect.size.width, self.labelRect.size.height)];
     self.lblLabel.numberOfLines = 0;
     self.lblLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.lblLabel.font = self.data.labelFont;
     self.lblLabel.textColor = self.data.labelColor;
     self.lblLabel.text = self.data.labelText;
+    self.lblLabel.backgroundColor = [UIColor blueColor];
     [self addSubview:self.lblLabel];
 }
 
@@ -72,7 +75,53 @@
     }
 }
 
+//button origin for current vertical aligment
+- (CGFloat)verticalButtonOriginForHeight:(CGFloat)height
+{
+    CGFloat y = 0;
+    NSLog(@"%@", NSStringFromCGRect(self.labelRect));
+    
+    switch (self.data.verticalAlignment) {
+        case TNRadioButtonVerticalAligmentTop:
+            y = self.lineHeight / 2.f - height / 2.f;
+            break;
+        case TNRadioButtonVerticalAligmentMiddle:
+            y = self.labelRect.size.height / 2.f - height / 2.f;
+            break;
+        case TNRadioButtonVerticalAligmentBottom:
+            y = self.labelRect.size.height - height - self.lineHeight / 2.f + height / 2.f;
+            break;
+    }
+    
+    return y;
+}
+
 #pragma mark - Animations
 - (void)selectWithAnimation:(BOOL)animated {}
+
+#pragma mark - Getters
+
+- (CGRect)labelRect
+{
+    if (CGRectEqualToRect(_labelRect, CGRectZero)) {
+        _labelRect = [self.data.labelText boundingRectWithSize:CGSizeMake(150, CGFLOAT_MAX)
+                                                       options:NSStringDrawingUsesLineFragmentOrigin
+                                                    attributes:@{NSFontAttributeName:self.data.labelFont}
+                                                       context:nil];
+    }
+    return _labelRect;
+}
+
+- (CGFloat)lineHeight
+{
+    if (!_lineHeight) {
+        NSString *stringThatFitsToOneLine = @"-";
+        _lineHeight = [stringThatFitsToOneLine boundingRectWithSize:CGSizeMake(150, CGFLOAT_MAX)
+                                                            options:NSStringDrawingUsesLineFragmentOrigin
+                                                         attributes:@{NSFontAttributeName:self.data.labelFont}
+                                                            context:nil].size.height;
+    }
+    return _lineHeight;
+}
 
 @end
