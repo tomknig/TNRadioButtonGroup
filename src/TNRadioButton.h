@@ -30,8 +30,6 @@
 - (instancetype)initWithData:(TNRadioButtonData *)data;
 - (void)setup;
 - (void)selectWithAnimation:(BOOL)animated;
-
-//button origin for current vertical aligment
 - (CGFloat)verticalButtonOriginForHeight:(CGFloat)height;
 
 @end

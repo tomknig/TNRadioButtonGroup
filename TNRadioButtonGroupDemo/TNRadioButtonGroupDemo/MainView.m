@@ -96,16 +96,6 @@
     snowboardData.labelText = @"Snowboarding";
     snowboardData.identifier = @"snowboarding";
     snowboardData.selected = NO;
-  
-    
-    TNRectangularRadioButtonData *tennisData = [TNRectangularRadioButtonData new];
-    tennisData.labelText = @"Tennis";
-    tennisData.identifier = @"tennis";
-    tennisData.selected = YES;
-    tennisData.borderColor = [UIColor blackColor];
-    tennisData.rectangleColor = [UIColor blackColor];
-    tennisData.borderWidth = tennisData.borderHeight = 12;
-    tennisData.rectangleWidth = tennisData.rectangleHeight = 5;
     
     TNRectangularRadioButtonData *programmingData = [TNRectangularRadioButtonData new];
     programmingData.labelText = @"Programming";
@@ -116,7 +106,7 @@
     programmingData.borderWidth = programmingData.borderHeight = 12;
     programmingData.rectangleWidth = programmingData.rectangleHeight = 5;
     
-    self.hobbiesGroup = [[TNRadioButtonGroup alloc] initWithRadioButtonData:@[snowboardData,tennisData, programmingData] layout:TNRadioButtonGroupLayoutVertical];
+    self.hobbiesGroup = [[TNRadioButtonGroup alloc] initWithRadioButtonData:@[snowboardData, programmingData] layout:TNRadioButtonGroupLayoutVertical];
     self.hobbiesGroup.identifier = @"Hobbies group";
     [self.hobbiesGroup create];
     self.hobbiesGroup.position = CGPointMake(25, 310);
@@ -145,7 +135,7 @@
     self.temperatureGroup = [[TNRadioButtonGroup alloc] initWithRadioButtonData:@[coldData, hotData] layout:TNRadioButtonGroupLayoutVertical];
     self.temperatureGroup.identifier = @"Temperature group";
     [self.temperatureGroup create];
-    self.temperatureGroup.position = CGPointMake(25, 440);
+    self.temperatureGroup.position = CGPointMake(25, 421);
     
     [self addSubview:self.temperatureGroup];
     

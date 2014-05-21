@@ -72,11 +72,9 @@
     }
 }
 
-//button origin for current vertical aligment
 - (CGFloat)verticalButtonOriginForHeight:(CGFloat)height
 {
     CGFloat y = 0;
-    NSLog(@"%@", NSStringFromCGRect(self.labelRect));
     
     switch (self.data.verticalAlignment) {
         case TNRadioButtonVerticalAligmentTop:
