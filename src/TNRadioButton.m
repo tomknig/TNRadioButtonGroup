@@ -40,7 +40,12 @@
 - (void)createRadioButton {}
 
 - (void)createLabel {
-    self.lblLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.radioButton.frame.origin.x + self.radioButton.frame.size.width + 15, 0, self.labelRect.size.width, self.labelRect.size.height)];
+    CGFloat labelWidth = self.labelRect.size.width;
+    if (self.data.minLabelWidth > 0 && self.data.minLabelWidth > self.labelRect.size.width) {
+        labelWidth = self.data.minLabelWidth;
+    }
+    
+    self.lblLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.radioButton.frame.origin.x + self.radioButton.frame.size.width + 15, 0, labelWidth, self.labelRect.size.height)];
     self.lblLabel.numberOfLines = 0;
     self.lblLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.lblLabel.font = self.data.labelFont;
@@ -96,10 +101,15 @@
 
 #pragma mark - Getters
 
+- (CGFloat)maxLabelWidth
+{
+    return self.data.maxLabelWidth > 0 ? self.data.maxLabelWidth : kTNDefaultRadioButtonLabelWidth;
+}
+
 - (CGRect)labelRect
 {
     if (CGRectEqualToRect(_labelRect, CGRectZero)) {
-        _labelRect = [self.data.labelText boundingRectWithSize:CGSizeMake(150, CGFLOAT_MAX)
+        _labelRect = [self.data.labelText boundingRectWithSize:CGSizeMake([self maxLabelWidth], CGFLOAT_MAX)
                                                        options:NSStringDrawingUsesLineFragmentOrigin
                                                     attributes:@{NSFontAttributeName:self.data.labelFont}
                                                        context:nil];
@@ -111,7 +121,7 @@
 {
     if (!_lineHeight) {
         NSString *stringThatFitsToOneLine = @"-";
-        _lineHeight = [stringThatFitsToOneLine boundingRectWithSize:CGSizeMake(150, CGFLOAT_MAX)
+        _lineHeight = [stringThatFitsToOneLine boundingRectWithSize:CGSizeMake([self maxLabelWidth], CGFLOAT_MAX)
                                                             options:NSStringDrawingUsesLineFragmentOrigin
                                                          attributes:@{NSFontAttributeName:self.data.labelFont}
                                                             context:nil].size.height;

@@ -18,6 +18,8 @@
     self = [super init];
     if (self) {
         self.verticalAlignment = TNRadioButtonVerticalAligmentMiddle;
+        self.minLabelWidth = -1;
+        self.maxLabelWidth = -1;
     }
     return self;
 }

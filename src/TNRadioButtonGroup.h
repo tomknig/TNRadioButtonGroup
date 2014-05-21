@@ -11,8 +11,6 @@
 #import "TNRectangularRadioButton.h"
 #import "TNImageRadioButton.h"
 
-#define kTNDefaultRadioButtonLabelWidth 150
-
 extern NSString *const SELECTED_RADIO_BUTTON_CHANGED;
 
 typedef enum : NSUInteger {

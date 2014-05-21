@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define kTNDefaultRadioButtonLabelWidth 150
+
 typedef enum : NSUInteger {
     TNRadioButtonVerticalAligmentTop,
     TNRadioButtonVerticalAligmentMiddle,
@@ -21,6 +23,8 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) NSString *labelText;
 @property (nonatomic) BOOL selected;
 @property (nonatomic) TNRadioButtonVerticalAligment verticalAlignment;
+@property (nonatomic) CGFloat minLabelWidth;
+@property (nonatomic) CGFloat maxLabelWidth;
 
 @property (nonatomic, strong) UIFont *labelFont;
 @property (nonatomic, strong) UIColor *labelColor;
