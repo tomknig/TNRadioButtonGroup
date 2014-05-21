@@ -22,6 +22,7 @@
         [self createHorizontalList];
         [self createVerticalList];
         [self createHorizontalListWithImage];
+        [self createHorizontalListWithVerticalAligment];
     }
     
     return self;
@@ -61,6 +62,35 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sexGroupUpdated:) name:SELECTED_RADIO_BUTTON_CHANGED object:self.sexGroup];
 }
 
+- (void)createHorizontalListWithVerticalAligment {
+    TNCircularRadioButtonData *maleData = [TNCircularRadioButtonData new];
+    maleData.labelText = @"Male\nLine 2";
+    maleData.identifier = @"male";
+    maleData.selected = YES;
+    maleData.verticalAlignment = TNRadioButtonVerticalAligmentTop;
+    
+    
+    TNCircularRadioButtonData *femaleData = [TNCircularRadioButtonData new];
+    femaleData.labelText = @"Female\nLine 2";
+    femaleData.identifier = @"female";
+    femaleData.selected = NO;
+    femaleData.verticalAlignment = TNRadioButtonVerticalAligmentMiddle;
+    
+    TNCircularRadioButtonData *alienData = [TNCircularRadioButtonData new];
+    alienData.labelText = @"Alien\nLine 2";
+    alienData.identifier = @"alien";
+    alienData.selected = NO;
+    alienData.verticalAlignment = TNRadioButtonVerticalAligmentBottom;
+    
+    self.verticalAlignedGroup = [[TNRadioButtonGroup alloc] initWithRadioButtonData:@[maleData, femaleData, alienData] layout:TNRadioButtonGroupLayoutHorizontal];
+    self.verticalAlignedGroup.identifier = @"Aligment group";
+    [self.verticalAlignedGroup create];
+    self.verticalAlignedGroup.position = CGPointMake(25, 220);
+    [self addSubview:self.verticalAlignedGroup];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(verticalAlignedGroupUpdated:) name:SELECTED_RADIO_BUTTON_CHANGED object:self.verticalAlignedGroup];
+}
+
 - (void)createVerticalList {
     TNRectangularRadioButtonData *snowboardData = [TNRectangularRadioButtonData new];
     snowboardData.labelText = @"Snowboarding";
@@ -89,7 +119,7 @@
     self.hobbiesGroup = [[TNRadioButtonGroup alloc] initWithRadioButtonData:@[snowboardData,tennisData, programmingData] layout:TNRadioButtonGroupLayoutVertical];
     self.hobbiesGroup.identifier = @"Hobbies group";
     [self.hobbiesGroup create];
-    self.hobbiesGroup.position = CGPointMake(25, 265);
+    self.hobbiesGroup.position = CGPointMake(25, 310);
 
     [self addSubview:self.hobbiesGroup];
     
@@ -115,7 +145,7 @@
     self.temperatureGroup = [[TNRadioButtonGroup alloc] initWithRadioButtonData:@[coldData, hotData] layout:TNRadioButtonGroupLayoutVertical];
     self.temperatureGroup.identifier = @"Temperature group";
     [self.temperatureGroup create];
-    self.temperatureGroup.position = CGPointMake(25, 400);
+    self.temperatureGroup.position = CGPointMake(25, 440);
     
     [self addSubview:self.temperatureGroup];
     
@@ -132,6 +162,10 @@
 
 - (void)temperatureGroupUpdated:(NSNotification *)notification {
     NSLog(@"[MainView] Temperature group updated to %@", self.temperatureGroup.selectedRadioButton.data.identifier);
+}
+
+- (void)verticalAlignedGroupUpdated:(NSNotification *)notification {
+    NSLog(@"[MainView] VerticalAligned group updated to %@", self.verticalAlignedGroup.selectedRadioButton.data.identifier);
 }
 
 - (void)dealloc {
