@@ -56,7 +56,7 @@
     self.sexGroup = [[TNRadioButtonGroup alloc] initWithRadioButtonData:@[maleData, femaleData, alienData] layout:TNRadioButtonGroupLayoutHorizontal];
     self.sexGroup.identifier = @"Sex group";
     [self.sexGroup create];
-    self.sexGroup.position = CGPointMake(25, 175);
+    self.sexGroup.position = CGPointMake(25, 160);
     [self addSubview:self.sexGroup];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sexGroupUpdated:) name:SELECTED_RADIO_BUTTON_CHANGED object:self.sexGroup];
@@ -85,7 +85,7 @@
     self.verticalAlignedGroup = [[TNRadioButtonGroup alloc] initWithRadioButtonData:@[maleData, femaleData, alienData] layout:TNRadioButtonGroupLayoutHorizontal];
     self.verticalAlignedGroup.identifier = @"Aligment group";
     [self.verticalAlignedGroup create];
-    self.verticalAlignedGroup.position = CGPointMake(25, 220);
+    self.verticalAlignedGroup.position = CGPointMake(25, 205);
     [self addSubview:self.verticalAlignedGroup];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(verticalAlignedGroupUpdated:) name:SELECTED_RADIO_BUTTON_CHANGED object:self.verticalAlignedGroup];

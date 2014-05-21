@@ -40,15 +40,12 @@
 - (void)createRadioButton {}
 
 - (void)createLabel {
-    self.backgroundColor = [UIColor greenColor];
-    
     self.lblLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.radioButton.frame.origin.x + self.radioButton.frame.size.width + 15, 0, self.labelRect.size.width, self.labelRect.size.height)];
     self.lblLabel.numberOfLines = 0;
     self.lblLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.lblLabel.font = self.data.labelFont;
     self.lblLabel.textColor = self.data.labelColor;
     self.lblLabel.text = self.data.labelText;
-    self.lblLabel.backgroundColor = [UIColor blueColor];
     [self addSubview:self.lblLabel];
 }
 
