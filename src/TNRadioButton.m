@@ -101,15 +101,15 @@
 
 #pragma mark - Getters
 
-- (CGFloat)maxLabelWidth
+- (CGFloat)boundingLabelWidth
 {
-    return self.data.maxLabelWidth > 0 ? self.data.maxLabelWidth : kTNDefaultRadioButtonLabelWidth;
+    return self.data.maxLabelWidth > 0 ? self.data.maxLabelWidth : self.data.minLabelWidth > 0 && self.data.minLabelWidth > kTNDefaultRadioButtonLabelWidth ? self.data.minLabelWidth : kTNDefaultRadioButtonLabelWidth;
 }
 
 - (CGRect)labelRect
 {
     if (CGRectEqualToRect(_labelRect, CGRectZero)) {
-        _labelRect = [self.data.labelText boundingRectWithSize:CGSizeMake([self maxLabelWidth], CGFLOAT_MAX)
+        _labelRect = [self.data.labelText boundingRectWithSize:CGSizeMake([self boundingLabelWidth], CGFLOAT_MAX)
                                                        options:NSStringDrawingUsesLineFragmentOrigin
                                                     attributes:@{NSFontAttributeName:self.data.labelFont}
                                                        context:nil];
@@ -121,7 +121,7 @@
 {
     if (!_lineHeight) {
         NSString *stringThatFitsToOneLine = @"-";
-        _lineHeight = [stringThatFitsToOneLine boundingRectWithSize:CGSizeMake([self maxLabelWidth], CGFLOAT_MAX)
+        _lineHeight = [stringThatFitsToOneLine boundingRectWithSize:CGSizeMake([self boundingLabelWidth], CGFLOAT_MAX)
                                                             options:NSStringDrawingUsesLineFragmentOrigin
                                                          attributes:@{NSFontAttributeName:self.data.labelFont}
                                                             context:nil].size.height;
