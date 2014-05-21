@@ -8,12 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum : NSUInteger {
+    TNRadioButtonVerticalAligmentTop,
+    TNRadioButtonVerticalAligmentMiddle,
+    TNRadioButtonVerticalAligmentBottom
+} TNRadioButtonVerticalAligment;
+
 @interface TNRadioButtonData : NSObject
 
 @property (nonatomic, copy) NSString *identifier;
 @property (nonatomic) NSInteger tag;
 @property (nonatomic, copy) NSString *labelText;
 @property (nonatomic) BOOL selected;
+@property (nonatomic) TNRadioButtonVerticalAligment verticalAlignment;
 
 @property (nonatomic, strong) UIFont *labelFont;
 @property (nonatomic, strong) UIColor *labelColor;
