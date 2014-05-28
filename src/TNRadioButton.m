@@ -55,11 +55,8 @@
 }
 
 - (void)createHiddenButton {
-    
-    int height = MAX(self.lblLabel.frame.size.height, self.radioButton.frame.size.height);
-    
     self.btnHidden = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.btnHidden.frame = CGRectMake(0, 0, self.lblLabel.frame.origin.x + self.lblLabel.frame.size.width, height);
+    self.btnHidden.frame = CGRectMake(0, 0, self.lblLabel.frame.origin.x + self.lblLabel.frame.size.width, self.lblLabel.frame.size.height);
     [self addSubview:self.btnHidden];
     
     [self.btnHidden addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
