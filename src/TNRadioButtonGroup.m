@@ -113,7 +113,7 @@ NSString *const SELECTED_RADIO_BUTTON_CHANGED = @"selectedRadioButtonChanged";
     for (TNRadioButton *rb in self.radioButtons) {
         
         if( rb != radioButton ){
-            rb.data.selected = !radioButton.data.selected;
+            rb.data.selected = NO;
         }
 
         [rb selectWithAnimation:YES];
