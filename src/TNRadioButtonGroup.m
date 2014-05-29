@@ -119,7 +119,7 @@ NSString *const SELECTED_RADIO_BUTTON_CHANGED = @"selectedRadioButtonChanged";
         [rb selectWithAnimation:YES];
     }
     
-    self.selectedRadioButton = radioButton;
+    self.selectedRadioButton = radioButton.data.selected ? radioButton : nil;
 }
 
 #pragma mark - Getters / Setters
