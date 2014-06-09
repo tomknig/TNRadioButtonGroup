@@ -25,6 +25,7 @@ typedef enum : NSUInteger {
 @property (nonatomic) TNRadioButtonVerticalAligment verticalAlignment;
 @property (nonatomic) CGFloat minLabelWidth;
 @property (nonatomic) CGFloat maxLabelWidth;
+@property (nonatomic) CGFloat accessibilityPadding;
 
 @property (nonatomic, strong) UIFont *labelFont;
 @property (nonatomic, strong) UIColor *labelColor;

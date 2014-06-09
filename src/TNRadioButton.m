@@ -34,6 +34,7 @@
     [self createHiddenButton];
     
     [self selectWithAnimation:NO];
+    
     self.frame = self.btnHidden.frame;
 }
 
@@ -45,7 +46,7 @@
         labelWidth = self.data.minLabelWidth;
     }
     
-    self.lblLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.radioButton.frame.origin.x + self.radioButton.frame.size.width + 15, 0, labelWidth, self.labelRect.size.height)];
+    self.lblLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.radioButton.frame.origin.x + self.radioButton.frame.size.width + 15, self.data.accessibilityPadding, labelWidth, self.labelRect.size.height)];
     self.lblLabel.numberOfLines = 0;
     self.lblLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.lblLabel.font = self.data.labelFont;
@@ -55,10 +56,13 @@
 }
 
 - (void)createHiddenButton {
-    CGFloat height = MAX(self.lblLabel.frame.size.height, self.radioButton.frame.size.height);
+    CGFloat height = MAX(self.lblLabel.frame.size.height, self.radioButton.frame.size.height) + 2 * self.data.accessibilityPadding;
     CGFloat y = MIN(0, self.radioButton.frame.origin.y);
+    
+    CGRect frame = CGRectMake(0, y, self.lblLabel.frame.origin.x + self.lblLabel.frame.size.width, height);
+    
     self.btnHidden = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.btnHidden.frame = CGRectMake(0, y, self.lblLabel.frame.origin.x + self.lblLabel.frame.size.width, height);
+    self.btnHidden.frame = frame;
     [self addSubview:self.btnHidden];
     
     [self.btnHidden addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
@@ -75,17 +79,17 @@
 
 - (CGFloat)verticalButtonOriginForHeight:(CGFloat)height
 {
-    CGFloat y = 0;
+    CGFloat y = self.data.accessibilityPadding;
     
     switch (self.data.verticalAlignment) {
         case TNRadioButtonVerticalAligmentTop:
-            y = self.lineHeight / 2.f - height / 2.f;
+            y += self.lineHeight / 2.f - height / 2.f;
             break;
         case TNRadioButtonVerticalAligmentMiddle:
-            y = self.labelRect.size.height / 2.f - height / 2.f;
+            y += self.labelRect.size.height / 2.f - height / 2.f;
             break;
         case TNRadioButtonVerticalAligmentBottom:
-            y = self.labelRect.size.height - height - self.lineHeight / 2.f + height / 2.f;
+            y += self.labelRect.size.height - height - self.lineHeight / 2.f + height / 2.f;
             break;
     }
     
