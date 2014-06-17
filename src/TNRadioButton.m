@@ -46,7 +46,7 @@
         labelWidth = self.data.minLabelWidth;
     }
     
-    self.lblLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.radioButton.frame.origin.x + self.radioButton.frame.size.width + 15, self.data.accessibilityPadding, labelWidth, self.labelRect.size.height)];
+    self.lblLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.radioButton.frame.origin.x + self.radioButton.frame.size.width + 15, self.data.accessibilityPadding - 4, labelWidth, self.labelRect.size.height + 8)];
     self.lblLabel.numberOfLines = 0;
     self.lblLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.lblLabel.font = self.data.labelFont;
